@@ -1,5 +1,8 @@
+
 class Student:
+
     STUDENT_NAME = ""
+    STUDENT_NAME_RQST = "Please enter Student Name"
     ACADEMIC_YEAR = 0
     TEST_1 = 0
     TEST_2 = 0
@@ -11,16 +14,75 @@ class Student:
     FINAL_MARK =  FINAL_COURSE_WORK+EXAM_CONTRIBUTION
 
 
-    def capture(value):
-        user_input = input(value)
-        return user_input
+    def capture(self, string):
+
+        print("\nPlease enter "+string+"\n")
+        input_d = input(string)
+        
+        return input_d
     
 
-    def validate_string(string):
-        if string.split().is_digit():
-            print("This is not a string")
-        else:
-            print("This is a string")
+def validate(string):
+
+    if string.isdigit():
+        result = "Number"
+    else:
+        result = "String"
+        
+    return result
 
 
+def capture_student():
 
+    student_1 = Student()
+    input_name = student_1.capture("Student name: ")
+    validation_result = validate(input_name)
+
+    if validation_result == "String":
+        print(input_name+" "+"captured successfully")
+        captured_name = input_name
+    else:
+        print("ERROR 1:"+input_name+" "+"is not a string\n")
+        print("Please try Again")
+        captured_name = ""
+        capture_student()
+
+    return captured_name
+        
+
+def capture_ay():
+
+    student_1 = Student()
+    input_year = student_1.capture("Academic Year: ")
+    validation_result = validate(input_year)
+
+    if validation_result == "String":
+        print("ERROR 2:"+input_year+" "+"is not a year\n")
+        print("Please try Again")
+        student_year = ""
+        capture_ay()
+    else:
+        print(input_year+" "+"captured successfully")
+        student_year = input_year
+
+    return student_year
+
+
+def capture_test():
+
+    student_1 = Student()
+    student_name = student_1.capture("\nTest 1 Marks:")
+
+    return student_name
+
+
+def grade():
+
+    student = capture_student()
+    print("Student Name: "+student)
+
+    academic_year = capture_ay()
+    print("Academic Year: "+academic_year)
+
+
+grade()
